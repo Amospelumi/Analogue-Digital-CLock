@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogue Clock</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .press{
+            padding: 8px;
+            position: absolute;
+            top: 70%;
+            left: 40%;
+
+        }
+        button{
+            padding: 15px;
+            border-radius: 1px;
+            color: white;
+            border-radius: 25px;
+            background-color: rgb(11, 11, 136);
+            box-shadow: -3px -3px 7px rgba(96, 96, 255, 0.219), 3px 3px 7px rgba(238, 238, 238, 0.164);
+            border-style: none;
+            cursor: pointer;
+        }
+    </style>
+
+
+
+
+</head>
+<body>
+        <div class="header">
+            <h2>Amos-Pelumi Clock.</h2>
+        </div>
+
+            <div id="analogue" class="icon-large icon-clock">
+                <div class="clock">
+                    <ol>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+
+                    <div id="hour"></div>
+                    <div id="min"></div>
+                    <div id="sec"></div>
+                </div>
+            </div>
+
+        <div class="press">
+            <button onclick="Digital()">Digital Clock</button>
+            <button onclick="Analogue()">Analogue Clock</button>
+        </div>
+        
+
+        
+
+        <!-- digital clock start -->
+        <div id="datetime" class="datetime">
+            <div class="date">
+                <span id="dayname">Day</span>
+                <span id="month">Month</span>
+                <span id="daynum">00</span>
+                <span id="year">Year</span>
+            </div>
+            <div class="time">
+                <span id="hours">00</span>
+                <span id="minutes">00</span>
+                <span id="seconds">00</span>
+                <span id="period">AM</span>
+            </div>
+        </div>
+
+
+        
+        <!-- digital Clock ends -->
+
+
+        <!-- Add Javascript for the analogue clock -->
+        <script>
+            var hour = document.getElementById("hour");
+            var min = document.getElementById("min");
+            var sec = document.getElementById("sec");
+
+            function initClock(){
+                var date = new Date();
+                var hours = date.getHours() % 12; // 0 - 23
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+
+
+                var hourDeg = hours * 30;
+                var minuteDeg = minute * 6;
+                var secondDeg = second * 6; // 360 / 60
+
+                hour.style.transform = 'rotate(' + hourDeg + 'deg)';
+                min.style.transform = 'rotate(' + minuteDeg + 'deg)';
+                sec.style.transform = 'rotate(' + secondDeg + 'deg)';
+                
+
+                setTimeout(initClock, 1000);
+            };
+
+            initClock();
+
+            function Digital(){
+                document.getElementById("datetime").style.display = "Block";
+                document.getElementById("analogue").style.display = "none";
+            }
+
+            function Analogue(){
+                document.getElementById("analogue").style.display = "block";
+                document.getElementById("datetime").style.display = "none";
+            }
+
+
+            
+        </script>
+    </div>
+</body>
+</html>
